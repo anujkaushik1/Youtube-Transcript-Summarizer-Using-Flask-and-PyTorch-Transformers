@@ -1,11 +1,13 @@
 from os import pipe
-from flask import Flask, json, request, redirect, url_for
+from flask import Flask, json, request, redirect, url_for,jsonify
 from youtube_transcript_api import YouTubeTranscriptApi
 from transformers import pipeline
+from flask_cors import CORS
 
 
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route("/index/<id>")
 def index(id):
@@ -35,7 +37,7 @@ def sum(transcript):
     if(summary_text):
         print("Hello world")
 
-    return summary_text
-
+    return jsonify({'text' : summary_text})
+ 
  
 
